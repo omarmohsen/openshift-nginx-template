@@ -12,7 +12,7 @@ After modifying the nginx.conf file inside the config map you need to let nginx 
 
     nginx -s reload
 
-## Optional Parameters:
+## Other Parameters:
 
 **NGINX_VERSION:**
 "Specify the nginx version you are using, valid options are: nginx-112, nginx-110, nginx-18, nginx-16" 
