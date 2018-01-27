@@ -8,6 +8,7 @@ In order to use the template use the following oc command:
     oc process -f nginx-template-centos7.yaml NGINX_ROUTE_HOSTNAME=<nginx route hostname without http> | oc create -f -
 
 or
+
     oc process -f nginx-template-rhel7.yaml NGINX_ROUTE_HOSTNAME=<nginx route hostname without http> | oc create -f -
 
 
