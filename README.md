@@ -1,11 +1,14 @@
 
 # openshift-nginx-template
-OpenShift nginx template, the template uses RPM based docker images as well as config maps instead of building docker images with new configuration each time
+OpenShift nginx templates, the template uses RPM based docker images as well as config maps instead of building docker images with new configuration each time
 
 ## Usage
 In order to use the template use the following oc command:
 
-    oc process -f nginx-template.yaml NGINX_ROUTE_HOSTNAME=<nginx route hostname without http> | oc create -f -
+    oc process -f nginx-template-centos7.yaml NGINX_ROUTE_HOSTNAME=<nginx route hostname without http> | oc create -f -
+
+or
+    oc process -f nginx-template-rhel7.yaml NGINX_ROUTE_HOSTNAME=<nginx route hostname without http> | oc create -f -
 
 
 After modifying the nginx.conf file inside the config map you need to let nginx load the new configuration, either to you can restart the container or can execute the following command inside the container without restarting:
@@ -15,10 +18,10 @@ After modifying the nginx.conf file inside the config map you need to let nginx 
 ## Other Parameters:
 
 **NGINX_VERSION:**
-"Specify the nginx version you are using, valid options are: nginx-112, nginx-110, nginx-18, nginx-16" 
+"Specify the nginx version you are using, valid options are: nginx-112, nginx-110, nginx-18" 
 
-**NGINX_BASE_IMAGE_OS:**
-"RPM-based distros are used in this template, either use rhel7 or centos7, note: if you are using RHEL 7 you must have a valid subscription"
+**APP_NAME:**
+"Name of the app, all objects created will have this name except for the imagestream"
 
 **NGINX_DEFAULT_HTTP_PORT:**
 "Default port nginx uses to listen on, if you specify a port lower than 1024, the container must run as privileged"
