@@ -69,9 +69,9 @@ objects:
             periodSeconds: 10
             successThreshold: 1
             tcpSocket:
-              port: ${NGINX_DEFAULT_HTTP_PORT}
+              port: ${NGINX_DEFAULT_HTTP_PORT}-tcp
             timeoutSeconds: 20
-          resources: {}         
+          resources: {}
           terminationMessagePath: /dev/termination-log
           volumeMounts:
           - mountPath: /etc/opt/rh/rh-nginx112/nginx/
@@ -80,6 +80,8 @@ objects:
             name: volume-1l43r
           - mountPath: /etc/opt/rh/rh-nginx112/nginx/default.d
             name: volume-tlwx7
+          - mountPath: /opt/app-root/src
+            name: nginx-root
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         securityContext: {}
@@ -97,6 +99,9 @@ objects:
             defaultMode: 420
             name: nginx-default.d
           name: volume-tlwx7
+        - name: nginx-root
+          persistentVolumeClaim:
+            claimName: "nginx-root"
     test: false
     triggers:
     - type: ConfigChange
@@ -152,6 +157,18 @@ objects:
       name: latest
   status:
     dockerImageRepository: ""
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+    creationTimestamp: null
+    name: nginx-root
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: ${ROOT_DIRECTORY_SIZE_IN_GB}Gi
 - apiVersion: v1
   data:
     virtualhost.conf: ""
@@ -1085,4 +1102,7 @@ parameters:
     required: true 
   - name: APP_NAME
     value: "nginx"
+    required: true
+  - name: ROOT_DIRECTORY_SIZE_IN_GB
+    value: "5"
     required: true

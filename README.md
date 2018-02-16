@@ -28,9 +28,13 @@ After modifying the nginx.conf file inside the config map you need to let nginx 
 "Default port nginx uses to listen on, if you specify a port lower than 1024, the container must run as privileged"
 
 **NGINX_ACCESS_LOG_PATH:**
-Path where nginx should write the access logs, either specify the file or if you want it the logs to be printed in the container logs redirect it to STDOUT by entering the value /dev/stdout"
+"Path where nginx should write the access logs, either specify the file or if you want it the logs to be printed in the container logs redirect it to STDOUT by entering the value /dev/stdout"
 
 **NGINX_ERROR_LOG_PATH:**
 "Path where nginx should write the error logs, either specify the file or if you want it the logs to be printed in the container logs use /dev/stdout"
 
+**ROOT_DIRECTORY_SIZE_IN_GB:**
+"Size of nginx root in GB"
 
+
+Note: Readiness probe port must be configured manually due to this [bug]: https://bugzilla.redhat.com/show_bug.cgi?id=1332871
