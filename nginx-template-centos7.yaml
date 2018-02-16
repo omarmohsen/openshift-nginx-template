@@ -63,7 +63,15 @@ objects:
             protocol: TCP
           - containerPort: 8443
             protocol: TCP
-          resources: {}
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: ${NGINX_DEFAULT_HTTP_PORT}
+            timeoutSeconds: 20
+          resources: {}         
           terminationMessagePath: /dev/termination-log
           volumeMounts:
           - mountPath: /etc/opt/rh/rh-nginx112/nginx/
