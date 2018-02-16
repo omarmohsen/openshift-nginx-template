@@ -1,4 +1,5 @@
 
+
 # openshift-nginx-template
 OpenShift nginx templates, the templates use RPM based docker images as well as config maps instead of building docker images with new configuration each time
 
@@ -36,5 +37,4 @@ After modifying the nginx.conf file inside the config map you need to let nginx 
 **ROOT_DIRECTORY_SIZE_IN_GB:**
 "Size of nginx root in GB"
 
-
-Note: Readiness probe port must be configured manually due to this [bug]: https://bugzilla.redhat.com/show_bug.cgi?id=1332871
+Note: Readiness probe port must be configured manually due to [bug](https://bugzilla.redhat.com/show_bug.cgi?id=1332871)
